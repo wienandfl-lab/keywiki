@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KEYWIKI — Mechanical Keyboards</title>
+  <meta name="theme-color" content="#000">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ======================================================
+     INTRO ANIMATION OVERLAY
+     Keyswitch-Explosionszeichnung die zusammenkommt
+     ====================================================== -->
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro__stage">
+    <svg class="intro__svg" id="intro-svg" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Stem (top part) -->
+      <g class="sw-stem" id="sw-stem">
+        <rect x="155" y="40" width="90" height="120" rx="8" fill="#1a1a1a" stroke="#d4a017" stroke-width="1.5"/>
+        <rect x="170" y="55" width="60" height="90" rx="4" fill="#111" stroke="#d4a01755" stroke-width="1"/>
+        <!-- plus-shaped cross -->
+        <rect x="186" y="70" width="28" height="60" fill="#d4a017" opacity=".9"/>
+        <rect x="168" y="88" width="64" height="24" fill="#d4a017" opacity=".9"/>
+      </g>
+      <!-- Upper Housing -->
+      <g class="sw-upper" id="sw-upper">
+        <rect x="140" y="170" width="120" height="60" rx="6" fill="#222" stroke="#d4a017" stroke-width="1.5"/>
+        <circle cx="200" cy="200" r="22" fill="#111" stroke="#d4a01766" stroke-width="1"/>
+        <text x="200" y="205" text-anchor="middle" fill="#d4a017" font-size="10" font-family="JetBrains Mono">∅</text>
+      </g>
+      <!-- Spring -->
+      <g class="sw-spring" id="sw-spring">
+        <path d="M185 240 Q200 248 215 240 Q200 255 185 248 Q200 263 215 255 Q200 270 185 263 Q200 278 215 270" stroke="#888" stroke-width="2" fill="none"/>
+      </g>
+      <!-- Lower Housing -->
+      <g class="sw-lower" id="sw-lower">
+        <rect x="140" y="280" width="120" height="70" rx="6" fill="#1a1a1a" stroke="#d4a017" stroke-width="1.5"/>
+        <!-- PCB pins -->
+        <line x1="175" y1="350" x2="175" y2="370" stroke="#d4a017" stroke-width="3"/>
+        <line x1="225" y1="350" x2="225" y2="370" stroke="#d4a017" stroke-width="3"/>
+        <circle cx="175" cy="370" r="5" fill="#d4a017"/>
+        <circle cx="225" cy="370" r="5" fill="#d4a017"/>
+      </g>
+      <!-- Label overlay -->
+      <g class="sw-labels" opacity="0" id="sw-labels">
+        <line x1="260" y1="80" x2="310" y2="80" stroke="#d4a01766" stroke-width="1"/>
+        <text x="315" y="84" fill="#d4a017" font-size="9" font-family="JetBrains Mono">STEM</text>
+        <line x1="260" y1="200" x2="310" y2="200" stroke="#d4a01766" stroke-width="1"/>
+        <text x="315" y="204" fill="#d4a017" font-size="9" font-family="JetBrains Mono">UPPER HOUSING</text>
+        <line x1="260" y1="255" x2="310" y2="255" stroke="#d4a01766" stroke-width="1"/>
+        <text x="315" y="259" fill="#d4a017" font-size="9" font-family="JetBrains Mono">SPRING</text>
+        <line x1="260" y1="315" x2="310" y2="315" stroke="#d4a01766" stroke-width="1"/>
+        <text x="315" y="319" fill="#d4a017" font-size="9" font-family="JetBrains Mono">LOWER HOUSING</text>
+      </g>
+    </svg>
+    <div class="intro__word" id="intro-word">CHERRY MX RED</div>
+    <div class="intro__sub" id="intro-sub">Linear · 45g actuation · 2mm pre-travel · 4mm total</div>
+  </div>
+  <button class="intro__skip" id="intro-skip" aria-label="Skip intro">SKIP →</button>
+</div>
+
+<!-- ======================================================
+     MAIN APP
+     ====================================================== -->
+<div class="app" id="app" hidden>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="nav__inner">
+      <a class="nav__logo" href="#" aria-label="KeyWiki">
+        <span class="logo-k">K</span>EYWIKI
+      </a>
+      <div class="nav__tabs" role="tablist">
+        <button class="tab tab--active" data-page="build" role="tab" aria-selected="true">BUILD</button>
+        <button class="tab" data-page="switches" role="tab" aria-selected="false">SWITCHES</button>
+        <button class="tab" data-page="pcb" role="tab" aria-selected="false">PCB</button>
+        <button class="tab" data-page="feel" role="tab" aria-selected="false">FEEL</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ PAGE: BUILD ============ -->
+  <main class="page page--active" id="page-build" role="tabpanel">
+    <section class="hero-build">
+      <div class="hero-build__content">
+        <p class="eyebrow">THE ANATOMY OF FEEL</p>
+        <h1 class="hero-h1">Every keypress<br>is a mechanism.</h1>
+        <p class="hero-p">From PCB trace to keycap surface, mechanical keyboards are the only consumer input device where the feel is entirely engineered — not felt by accident.</p>
+        <a href="#" class="btn btn--amber" data-page-link="switches">EXPLORE SWITCHES →</a>
+      </div>
+      <!-- Animated keyboard illustration -->
+      <div class="kbd-hero" id="kbd-hero" aria-hidden="true">
+        <canvas id="kbd-canvas" width="520" height="180"></canvas>
+      </div>
+    </section>
+
+    <section class="build-layers">
+      <div class="section-inner">
+        <p class="section-tag">// anatomy</p>
+        <h2 class="section-head">What's inside</h2>
+        <div class="layers-viz" id="layers-viz" aria-label="Keyboard layer exploded view">
+          <!-- Animated with JS -->
+        </div>
+        <div class="layers-list">
+          <div class="layer-item" data-layer="0">
+            <span class="layer-num">05</span>
+            <div>
+              <strong>KEYCAPS</strong>
+              <p>PBT or ABS plastic. Legends printed, dye-sub, or doubleshot. SA, OEM, Cherry, MT3 profiles.</p>
+            </div>
+          </div>
+          <div class="layer-item" data-layer="1">
+            <span class="layer-num">04</span>
+            <div>
+              <strong>PLATE</strong>
+              <p>Aluminium, brass, polycarbonate or FR4. Determines flex and sound signature.</p>
+            </div>
+          </div>
+          <div class="layer-item" data-layer="2">
+            <span class="layer-num">03</span>
+            <div>
+              <strong>SWITCHES</strong>
+              <p>Linear, tactile, clicky. 3-pin or 5-pin. The beating heart of the board.</p>
+            </div>
+          </div>
+          <div class="layer-item" data-layer="3">
+            <span class="layer-num">02</span>
+            <div>
+              <strong>PCB</strong>
+              <p>FR4 fibreglass. Hot-swap or soldered. RGB matrix. USB or wireless MCU.</p>
+            </div>
+          </div>
+          <div class="layer-item" data-layer="4">
+            <span class="layer-num">01</span>
+            <div>
+              <strong>CASE</strong>
+              <p>Alu, brass, polycarbonate, resin. Top-mount, gasket, tray. The shell that holds the world.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ PAGE: SWITCHES ============ -->
+  <main class="page" id="page-switches" role="tabpanel" hidden>
+    <section class="section-inner switch-page">
+      <p class="section-tag">// switches.db</p>
+      <h2 class="section-head">Switch types</h2>
+      <div class="switch-compare">
+        <!-- Switch selector -->
+        <div class="sw-selector">
+          <button class="sw-btn sw-btn--active" data-sw="linear">LINEAR</button>
+          <button class="sw-btn" data-sw="tactile">TACTILE</button>
+          <button class="sw-btn" data-sw="clicky">CLICKY</button>
+          <button class="sw-btn" data-sw="optical">OPTICAL</button>
+          <button class="sw-btn" data-sw="he">HALL EFFECT</button>
+        </div>
+        <!-- Force curve canvas -->
+        <div class="sw-display">
+          <canvas id="force-canvas" width="480" height="240" aria-label="Force-travel curve for selected switch"></canvas>
+          <div class="sw-stats" id="sw-stats"></div>
+        </div>
+        <!-- Switch exploded view -->
+        <div class="sw-3d" id="sw-3d" aria-label="Switch cross-section diagram">
+          <canvas id="switch-canvas" width="240" height="360"></canvas>
+        </div>
+      </div>
+      <!-- Switch table -->
+      <div class="sw-table-wrap">
+        <table class="sw-table">
+          <thead>
+            <tr><th>Switch</th><th>Type</th><th>Actuation</th><th>Total</th><th>Sound</th><th>Lubing</th></tr>
+          </thead>
+          <tbody id="sw-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ PAGE: PCB ============ -->
+  <main class="page" id="page-pcb" role="tabpanel" hidden>
+    <section class="section-inner pcb-page">
+      <p class="section-tag">// pcb.layout</p>
+      <h2 class="section-head">The PCB</h2>
+      <div class="pcb-stage">
+        <!-- Animated PCB canvas (background) -->
+        <canvas id="pcb-canvas" width="800" height="500" aria-label="Animated PCB layout being drawn"></canvas>
+        <div class="pcb-info" id="pcb-info">
+          <div class="pcb-info__step" id="pcb-step-text">Initialising trace routing...</div>
+          <div class="pcb-info__bar"><div id="pcb-bar" style="width:0%"></div></div>
+        </div>
+      </div>
+      <div class="pcb-specs">
+        <div class="pcb-spec-card" data-reveal>
+          <div class="pcb-spec-card__label">SUBSTRATE</div>
+          <div class="pcb-spec-card__val">FR4</div>
+          <p>Glass-reinforced epoxy laminate. 1.6mm standard. 0.8mm for flexible boards. Fire-rated UL94-V0.</p>
+        </div>
+        <div class="pcb-spec-card" data-reveal>
+          <div class="pcb-spec-card__label">COPPER WEIGHT</div>
+          <div class="pcb-spec-card__val">1 oz/ft²</div>
+          <p>35µm copper traces. Thicker copper (2oz) for high-current LED power rails and USB 3.x traces.</p>
+        </div>
+        <div class="pcb-spec-card" data-reveal>
+          <div class="pcb-spec-card__label">MCU</div>
+          <div class="pcb-spec-card__val">RP2040</div>
+          <p>Dual-core Cortex-M0+ at 133 MHz. 264KB SRAM. Runs QMK, KMK, or custom firmware. USB 1.1 FS.</p>
+        </div>
+        <div class="pcb-spec-card" data-reveal>
+          <div class="pcb-spec-card__label">LAYERS</div>
+          <div class="pcb-spec-card__val">2–4</div>
+          <p>Most keyboards: 2-layer. Premium boards: 4-layer for cleaner RF and dedicated ground plane.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ PAGE: FEEL ============ -->
+  <main class="page" id="page-feel" role="tabpanel" hidden>
+    <section class="section-inner feel-page">
+      <p class="section-tag">// feel.wav</p>
+      <h2 class="section-head">Sound &amp; feel</h2>
+      <p class="feel-intro">Click a switch type to hear and feel the difference. Waveforms are illustrative models of the acoustic profile.</p>
+      <div class="feel-grid">
+        <div class="feel-card feel-card--active" data-feel="linear" tabindex="0">
+          <div class="feel-card__name">LINEAR</div>
+          <canvas class="feel-wave" id="wave-linear" width="200" height="80" aria-label="Linear switch waveform"></canvas>
+          <p class="feel-card__desc">Smooth from top to bottom. No tactile bump. Preferred for gaming. Sound: low thock.</p>
+        </div>
+        <div class="feel-card" data-feel="tactile" tabindex="0">
+          <div class="feel-card__name">TACTILE</div>
+          <canvas class="feel-wave" id="wave-tactile" width="200" height="80" aria-label="Tactile switch waveform"></canvas>
+          <p class="feel-card__desc">Tactile bump before actuation. No audible click. Typing-focused. Sound: mid thock with pre-travel bump.</p>
+        </div>
+        <div class="feel-card" data-feel="clicky" tabindex="0">
+          <div class="feel-card__name">CLICKY</div>
+          <canvas class="feel-wave" id="wave-clicky" width="200" height="80" aria-label="Clicky switch waveform"></canvas>
+          <p class="feel-card__desc">Tactile bump + audible click mechanism. Cherry MX Blue, Kailh Box White. Loud. Office-unfriendly.</p>
+        </div>
+        <div class="feel-card" data-feel="he" tabindex="0">
+          <div class="feel-card__name">HALL EFFECT</div>
+          <canvas class="feel-wave" id="wave-he" width="200" height="80" aria-label="Hall effect switch waveform"></canvas>
+          <p class="feel-card__desc">Magnetic sensor. No physical contact at actuation. Adjustable actuation point 0.1–4.0 mm. No wear.</p>
+        </div>
+      </div>
+
+      <div class="lube-guide" data-reveal>
+        <p class="section-tag">// lube.guide</p>
+        <h3>Lubing guide</h3>
+        <div class="lube-table-wrap">
+          <table class="sw-table">
+            <thead><tr><th>Switch type</th><th>Lube</th><th>Where</th><th>Amount</th><th>Result</th></tr></thead>
+            <tbody>
+              <tr><td>Linear</td><td>Krytox 205g0</td><td>Rails, stem legs, spring</td><td>Thin coat</td><td>Smooth, deep thock</td></tr>
+              <tr><td>Tactile</td><td>Krytox 205g0 + 3204</td><td>Rails only (not bump)</td><td>Very thin</td><td>Smoother + retains bump</td></tr>
+              <tr><td>Clicky</td><td>Not recommended</td><td>—</td><td>—</td><td>Click mechanism dulled</td></tr>
+              <tr><td>Hall effect</td><td>Dielectric grease</td><td>Housing rails</td><td>Thin coat</td><td>Quieter, stable</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+</div><!-- .app -->
+
+<script src="script.js"></script>
+</body>
+</html>
